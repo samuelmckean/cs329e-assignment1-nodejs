@@ -14,15 +14,18 @@ app.get('/', (req, res) => {
     }).on('end', (data) => {
       try {
         poolData = JSON.parse(rawData);
-        console.log(poolData);
+        // console.log(poolData.data[0][8]);
       } catch(err) {
         console.error(`Got error: ${err.message}`);
+      }
+      for (let pool in poolData.data) {
+        console.log(poolData.data[pool][8]);
       }
     });
   }).on('error', (err) => {
     console.error(`Got error: ${err.message}`);
   });
-  res.sendStatus(200);
+  res.sendStatus(200);  // send OK
 });
 
 app.listen(port, () => console.log(`Example app is listening on port ${port}`));
