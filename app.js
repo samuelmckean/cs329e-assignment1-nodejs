@@ -8,6 +8,17 @@ app.get('/', (req, res) => {
   // send get request to get pool data
   https.get('https://data.austintexas.gov/api/views/jfqh-bqzu/rows.json?accessType=DOWNLOAD', (res) => {
     let rawData = ''; // initialize empty string to store JSON data
+    
+    try {
+      // get query parameters
+      let weekend = req.query.weekend;
+      let weekdayClosure = req.query.weekdayClosure;
+      let poolType = req.query.poolType;
+    } catch {
+      console.log('error: invalid query');
+    }
+    console.log('weekend:', weekend, 'weekdayClosure:', weekdayClosure, 'poolType:', poolType);
+    
     res.on('data', (packet) => {
       // process.stdout.write(packet);
       rawData += packet;  // add each JSON packet to rawData 
