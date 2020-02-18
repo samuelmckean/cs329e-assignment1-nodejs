@@ -12,9 +12,15 @@ app.get('/', (req, res) => {
       // process.stdout.write(packet);
       rawData += packet;  // add each JSON packet to rawData 
     }).on('end', (data) => {
+      // dictionary for looking up indices for queriable fields
+      const keys = {
+        poolName: 8, 
+        weekend: 12, 
+        weekdayClosure: 14, 
+        poolType: 15
+      };
       try {
         poolData = JSON.parse(rawData);
-        // console.log(poolData.data[0][8]);
       } catch(err) {
         console.error(`Got error: ${err.message}`);
       }
